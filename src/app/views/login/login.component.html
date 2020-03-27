@@ -1,0 +1,17 @@
+<div class="login-container">
+  <form [formGroup]="form" (ngSubmit)="login()" class="formLogin">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Seu email" name="email" formControlName="email" #email>
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" class="form-control" id="password" placeholder="Sua senha" formControlName="password" #password>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-send-login" >Logar</button>
+      
+      <small class="form-text text-muted links">Recuperar senha.</small>
+      <small class="form-text text-muted links" (click)="addNewClient();">Cadastrar-se.</small>
+  </form> 
+</div>

@@ -1,0 +1,42 @@
+<div class="container"> 
+  <form [formGroup]="form" (ngSubmit)="userRegister()">
+    <div class="form-group">
+      <label for="email">Email/Login</label>
+      <input type="email" class="form-control" id="email" placeholder="Email/Login" formControlName="email" #email>
+    </div>
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input type="password" class="form-control" id="password" placeholder="Senha" formControlName="password" #password>
+    </div>
+    <div class="form-group">
+      <label for="name">Nome</label>
+      <input class="form-control" id="name" placeholder="Nome" formControlName="name" #name>
+    </div>
+    <div class="form-group">
+      <label for="cpfCnpj">CPF/CNPJ</label>
+      <input class="form-control" id="cpfCnpj" placeholder="CPF/CNPJ" formControlName="cpfCnpj" #cpfCnpj>
+    </div>
+    <div class="form-group">
+      <label for="cep">CEP</label>
+      <input class="form-control" id="cep" placeholder="CEP" formControlName="cep" #cep
+        (blur)="getCEP()">
+    </div>
+    <div class="form-group">
+      <label for="address">Endereço</label>
+      <input class="form-control" id="address" placeholder="Endereço" formControlName="address" #address>
+    </div>
+    <div class="form-group">
+      <label for="conplement">Complemento</label>
+      <input class="form-control" id="complement" placeholder="Complemento" formControlName="complement" #complement>
+    </div>
+    <div class="form-group">
+      <label for="city">Cidade</label>
+      <input class="form-control" id="city" placeholder="Cidade" formControlName="city" #city>
+    </div>
+    <div class="form-group">
+      <label for="uf">UF</label>
+      <input class="form-control" id="uf" placeholder="UF" formControlName="uf" #uf>
+    </div>
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+  </form>
+</div>

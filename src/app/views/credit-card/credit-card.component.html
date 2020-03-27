@@ -1,0 +1,45 @@
+<painel-menu (sendNewPayment)="eventNewPayment()" (sendNewCreditCard)="eventNewCreditCard()"></painel-menu>
+<div class="fullContent" *blockUI="'ngBlockCreditCard'">
+    <div class="creditCard">
+        <!-- payment list-->
+        <div class="paymentsList">
+            <div style="display: flex;" class="paymentsMonth">
+                <div style="width: 33%; text-align: center; cursor: pointer;" *ngFor="let item of monthsTab" (click)="onSelectedMonth(item.month);">{{item.month}}</div>
+            </div>
+            
+            <!-- credit card values -->
+            <div *ngFor="let creditCard of creditCards;">
+                <label>Cartão - <span>{{creditCard.description}}</span> <span class="deleteCreditCard" (click)="openModalDeleteCC(modalDeleteCC);"><i class="fas fa-minus-circle"></i></span></label>
+                <!-- table cc  -->
+                <table class="table table-striped table-borderless" *ngIf="creditCard.payments.length">
+                    <thead>
+                        <tr>
+                            <th scope="col">Descrição do gasto</th>
+                            <th scope="col">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of creditCard.payments;">
+                            <td >{{item.description}}</td>
+                            <td>{{item.value}}
+                                <span (click)="deletePayment(item);"><i class="fas fa-minus-circle"></i></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table><!-- table cc  -->
+                <span class="totalCreditCard">Total de gasto: <b>{{creditCard.total}}</b></span>
+                
+                <!-- modal delete creditCard-->
+                <ng-template #modalDeleteCC>
+                    <div class="modal-body modalDeleteCC">
+                        <h4 class="modal-title pull-left">Deseja excluír seu o cartão - {{creditCard.description}}?</h4>
+                        <div class="buttons">
+                            <button class="btn btn-primary" (click)="deleteCreditCard(creditCard._id)"> Sim </button>
+                            <button class="btn btn-primary" (click)="closeModalDeleteCC()"> Não </button>
+                        </div>
+                    </div>
+                </ng-template> <!-- modal delete creditCard-->
+            </div> <!-- credit card  -->
+        </div> <!-- payment list-->
+    </div>
+</div>
