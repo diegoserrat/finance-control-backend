@@ -1,9 +1,17 @@
 const bodyParser = require('body-parser');
+
 const users = require('./usersRoute');
+const DebitsType = require('./debitsTypeRoute');
+const Debit = require('./debitsRoute');
+const CreditCard = require('./creditCardsRoute');
 
 module.exports = app => {
-    app.use(bodyParser.json());
-    app.use(users);
+    app.use(
+        bodyParser.json(),
+        users,
+        DebitsType,
+        Debit,
+        CreditCard);
     
     app.get('/', (req, res) => {
         res.send('olá');
