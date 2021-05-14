@@ -3,7 +3,7 @@ const database = require('../models');
 class CreditCardController {
     static async getAll( req, res ){
         try {
-            const allCreditCards = await database.CreditCard.findAll();
+            const allCreditCards = await database.CreditCard.findAll({include: { association: 'user'}});
             return res.status(200).json(allCreditCards);
         } catch(err){
             return res.status(500).json(err.message);
@@ -14,7 +14,9 @@ class CreditCardController {
         const { id } = req.params;
         
         try {
-            const creditCard = await database.CreditCard.findOne({ where: { id: Number(id) } });
+            const creditCard = await database.CreditCard.findOne({ 
+                where: { id: Number(id) },
+                include: { association: 'user'} });
             return res.status(200).json(creditCard);
         } catch(err) {
             return res.status(500).json(err.message);
@@ -36,7 +38,9 @@ class CreditCardController {
         const updatedCreditCard = req.body;
         try {
             await database.CreditCard.update( updatedCreditCard, { where: { id: Number(id) } });
-            const creditCard = await database.CreditCard.findOne({ where: { id: Number(id) } });
+            const creditCard = await database.CreditCard.findOne({ 
+                where: { id: Number(id) },
+                include: { association: 'user'} });
             return res.status(200).json(creditCard);
         } catch(err) {
             return res.status(500).json(err.message);
