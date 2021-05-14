@@ -1,8 +1,8 @@
 {
     "development": {
-        "username": "root",
-        "password": "slaughter",
-        "database": "finance_control",
+        "username": "your username",
+        "password": "your pwd",
+        "database": "your database",
         "host": "127.0.0.1",
         "dialect": "mysql",
         "operatorAliases": false
