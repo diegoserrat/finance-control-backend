@@ -5,7 +5,7 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class DebitsHome extends Model {
     static associate(models) {
-      DebitsHome.belongsTo(models.DebitType, {foreignKey: 'debit_type_id'});
+      DebitsHome.belongsTo(models.DebitType, {foreignKey: 'debit_type_id', as: 'debitType'});
     }
   };
   DebitsHome.init({

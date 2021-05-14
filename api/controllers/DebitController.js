@@ -3,7 +3,12 @@ const database = require('../models');
 class DebitController {
     static async getAll( req, res ){
         try {
-            const allDebits = await database.Debit.findAll();
+            const allDebits = await database.Debit.findAll({
+                include: [
+                    {association: 'creditCard'},
+                    {association: 'debitType'} 
+                ]
+            });
             return res.status(200).json(allDebits);
         } catch(err){
             return res.status(500).json(err.message);
@@ -14,7 +19,13 @@ class DebitController {
         const { id } = req.params;
         
         try {
-            const debits = await database.Debit.findOne({ where: { id: Number(id) } });
+            const debits = await database.Debit.findOne({ 
+                where: { id: Number(id) },
+                include: [
+                    {association: 'creditCard'},
+                    {association: 'debitType'} 
+                ],
+            });
             return res.status(200).json(debits);
         } catch(err) {
             return res.status(500).json(err.message);
@@ -25,7 +36,13 @@ class DebitController {
         const { id } = req.params;
         
         try {
-            const debits = await database.Debit.findAll({ where: { credit_card_id: Number(id) } });
+            const debits = await database.Debit.findAll({ 
+                where: { credit_card_id: Number(id) },
+                include: [
+                    {association: 'creditCard'},
+                    {association: 'debitType'} 
+                ],
+            });
             return res.status(200).json(debits);
         } catch(err) {
             return res.status(500).json(err.message);
@@ -47,7 +64,13 @@ class DebitController {
         const updatedDebits = req.body;
         try {
             await database.Debit.update( updatedDebits, { where: { id: Number(id) } });
-            const debits = await database.Debit.findOne({ where: { id: Number(id) } });
+            const debits = await database.Debit.findOne({ 
+                where: { credit_card_id: Number(id) },
+                include: [
+                    {association: 'creditCard'},
+                    {association: 'debitType'} 
+                ]
+            });
             return res.status(200).json(debits);
         } catch(err) {
             return res.status(500).json(err.message);

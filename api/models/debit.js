@@ -5,8 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Debit extends Model {
     static associate(models) {
-      Debit.belongsTo(models.CreditCard,{ foreignKey: 'credit_card_id' });
-      Debit.belongsTo(models.DebitType, {foreignKey: 'debit_type_id'});
+      Debit.belongsTo(models.CreditCard,{ foreignKey: 'credit_card_id' , as: 'creditCard' });
+      Debit.belongsTo(models.DebitType, {foreignKey: 'debit_type_id' , as: 'debitType'});
     }
   };
   Debit.init({

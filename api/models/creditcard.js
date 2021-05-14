@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class CreditCard extends Model {
     static associate(models) {
       CreditCard.hasMany(models.Debit, {foreignKey: 'credit_card_id'});
-      CreditCard.belongsTo(models.Users, {foreignKey: 'user_id'});
+      CreditCard.belongsTo(models.Users, {foreignKey: 'user_id', as: 'user'});
     }
   };
   CreditCard.init({
