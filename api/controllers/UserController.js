@@ -4,7 +4,7 @@ class UserController {
     
     static async getAll( req, res ){
         try {
-            const allUsers = await database.Users.findAll();
+            const allUsers = await database.Users.findAll({ attributes: { exclude: ['password']} });
             return res.status(200).json(allUsers);
         } catch(err){
             return res.status(500).json(err.message);
@@ -15,7 +15,8 @@ class UserController {
         const { id } = req.params;
         
         try {
-            const user = await database.Users.findOne({ where: { id: Number(id) } });
+            const user = await database.Users.findOne({ where: { id: Number(id) }, attributes: { exclude: ['password']} });
+            delete user.password;
             return res.status(200).json(user);
         } catch(err) {
             return res.status(500).json(err.message);
@@ -37,7 +38,7 @@ class UserController {
         const updatedUser = req.body;
         try {
             await database.Users.update( updatedUser, { where: { id: Number(id) } });
-            const user = await database.Users.findOne({ where: { id: Number(id) } });
+            const user = await database.Users.findOne({ where: { id: Number(id) }, attributes: { exclude: ['password']}  });
             return res.status(200).json(user);
         } catch(err) {
             return res.status(500).json(err.message);

@@ -15,6 +15,8 @@ class AuthController {
                 } else {
                     if(bcrypt.compareSync(password, user.password)){
                         const token = jwt.sign({user}, authConfig.secret, { expiresIn: authConfig.expiresIn });
+                        const { id, name, email, createdAt, updatedAt } = user;
+                        user = { id, name, email, createdAt, updatedAt };
                         res.json({ user, token });
                     } else {
                         res.status(401).json({msg: "Unauthorized"})
@@ -33,6 +35,8 @@ class AuthController {
         database.Users.create({ name, email, password: passwordCrypt})
             .then( user => {
                 const token = jwt.sign({ user}, authConfig.secret, { expiresIn: authConfig.expiresIn });
+                const { id, name, email, createdAt, updatedAt } = user;
+                user = { id, name, email, createdAt, updatedAt };
                 res.json({ user, token })
             }).catch(err => {
                 res.status(500).json(err);
