@@ -9,12 +9,19 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       price: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       month: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      year: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       user_id: {
